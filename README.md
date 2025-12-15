@@ -272,29 +272,32 @@ Ten specialized agents in `.github/agents/`:
 
 ```mermaid
 graph TB
-    Start[("👤 User<br/>High-level app description")]
-    
-    Start --> PRD["<b>/prd</b><br/>📝 PM Agent creates<br/>Product Requirements Document"]
-    
+    Start[("👤 User<br/>High-level app idea")]
+
+    Start --> Party["<b>@ask Party Mode</b><br/>🎉 All 10 agents brainstorm<br/>Refine idea collaboratively"]
+
+    Party --> PRD["<b>/prd</b><br/>📝 PM Agent creates<br/>Product Requirements Document"]
+
     PRD --> FRD["<b>/frd</b><br/>📋 PM Agent breaks down<br/>Feature Requirements Documents"]
-    
+
     FRD --> GenAgents["<b>/generate-agents</b><br/>📦 Dev Lead reads standards<br/>Generates AGENTS.md"]
-    
+
     GenAgents --> Plan["<b>/plan</b><br/>🔧 Dev Agent creates<br/>Technical Task Breakdown"]
-    
+
     Plan --> Choice{"Implementation<br/>Choice"}
-    
+
     Choice -->|Local| Implement["<b>/implement</b><br/>💻 Dev Agent<br/>implements code locally"]
-    
+
     Choice -->|Delegated| Delegate["<b>/delegate</b><br/>🎯 Dev Agent creates<br/>GitHub Issue + assigns<br/>Copilot Coding Agent"]
-    
+
     Implement --> Deploy["<b>/deploy</b><br/>☁️ Azure Agent<br/>creates IaC + deploys to Azure"]
-    
+
     Delegate --> Deploy
-    
+
     Deploy --> Done[("✅ Production-Ready<br/>Application on Azure")]
-    
+
     style Start fill:#e1f5ff
+    style Party fill:#ffe4ec
     style PRD fill:#fff4e6
     style FRD fill:#fff4e6
     style GenAgents fill:#e3f2fd
