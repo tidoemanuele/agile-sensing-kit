@@ -1,0 +1,93 @@
+# ASK (Agile Sensing Kit) Core Configuration
+# Hybrid Framework: Spec2Cloud + BMAD Method
+# Version: 1.0.0
+# Generated: 2025-12-14
+
+# ============================================
+# USER CONFIGURATION
+# ============================================
+
+user_name: "Developer"
+communication_language: "English"
+document_output_language: "English"
+
+# ============================================
+# PROJECT SETTINGS
+# ============================================
+
+project_name: "My Project"
+output_folder: "{project-root}/specs"
+agent_sidecar_folder: "{project-root}/.ask-memory"
+
+# ============================================
+# WORKFLOW DEFAULTS
+# ============================================
+
+# Step-based workflow settings
+workflow:
+  save_after_each_step: true
+  allow_step_resume: true
+  track_steps_in_frontmatter: true
+
+# Party mode settings
+party_mode:
+  enabled: true
+  max_agents: 5
+  exit_triggers:
+    - "*exit"
+    - "goodbye"
+    - "end party"
+    - "quit"
+
+# ============================================
+# AGENT DEFAULTS
+# ============================================
+
+agent_defaults:
+  # Show menu on agent activation
+  show_menu_on_start: true
+  # Reference project-context.md as authoritative source
+  use_project_context: true
+  # Enable party mode access for all agents
+  party_mode_enabled: true
+
+# ============================================
+# TDD DISCIPLINE (from BMAD)
+# ============================================
+
+tdd:
+  # Enforce red-green-refactor cycle
+  enforce_red_green_refactor: true
+  # Never lie about tests
+  require_actual_tests: true
+  # Story file is single source of truth
+  story_file_authority: true
+  # Test coverage minimum
+  min_coverage_percent: 85
+
+# ============================================
+# GITHUB COPILOT INTEGRATION (from Spec2Cloud)
+# ============================================
+
+copilot:
+  # Use handoffs for agent transitions
+  use_handoffs: true
+  # MCP server integration
+  mcp_servers:
+    - context7
+    - github
+    - microsoft.docs.mcp
+    - playwright
+    - deepwiki
+
+# ============================================
+# OUTPUT PATHS
+# ============================================
+
+paths:
+  prd: "{output_folder}/prd.md"
+  features: "{output_folder}/features"
+  tasks: "{output_folder}/tasks"
+  architecture: "{output_folder}/architecture"
+  modernize: "{output_folder}/modernize"
+  docs: "{output_folder}/docs"

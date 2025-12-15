@@ -1,0 +1,8 @@
+
+# APM dependencies
+apm_modules/
+**/AGENTS.md
+AGENTS.md
+.apm
+bmad-reference/
+.DS_Store
