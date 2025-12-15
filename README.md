@@ -36,7 +36,7 @@ ASK's standout feature: **Party Mode** brings all agents together for dynamic gr
 ```
 
 **What happens:**
-- All 9 specialized agents join the conversation
+- All 10 specialized agents join the conversation
 - Each responds in character with their unique perspective
 - PM asks "WHY?", Architect champions boring technology, Dev references file paths, TEA calculates risks
 - Natural cross-talk and debates between agents
@@ -69,7 +69,7 @@ ASK's standout feature: **Party Mode** brings all agents together for dynamic gr
    ```
 5. In **Copilot Chat** (right sidebar), start building:
    ```
-   @ask Party Mode      # Brainstorm with all 9 agents
+   @ask Party Mode      # Brainstorm with all 10 agents
    @pm /prd                    # Create Product Requirements
    @dev /plan                  # Create technical tasks
    ```
@@ -235,7 +235,7 @@ Ten specialized agents in `.github/agents/`:
 - **Instructions**: Analyzes codebase, generates Bicep templates, creates GitHub Actions, uses Azure Dev CLI
 
 
-#### 5. **Reverse Engineering Tech Analyst Agent** (`@tech-analist`) - Technical Analyst
+#### 5. **Reverse Engineering Tech Analyst Agent** (`@tech-analyst`) - Technical Analyst
 - **Model**: Claude Sonnet 4
 - **Tools**: Code analysis, documentation generation, specification extraction
 - **Purpose**: Reverse engineers existing codebases into specifications and documentation

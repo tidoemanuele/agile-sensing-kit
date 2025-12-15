@@ -182,5 +182,5 @@ else
   echo "  3. In Copilot Chat: @ask Party Mode"
 fi
 echo
-echo -e "${BOLD}🎉 Party Mode brings all 9 agents together for brainstorming!${NC}"
+echo -e "${BOLD}🎉 Party Mode brings all 10 agents together for brainstorming!${NC}"
 echo

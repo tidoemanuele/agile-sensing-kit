@@ -113,7 +113,7 @@ echo -e "${BOLD}Next steps:${NC}"
 echo "  1. Run setup: curl -fsSL https://raw.githubusercontent.com/${REPO}/main/scripts/setup.sh | bash"
 echo "  2. In Copilot Chat: @ask Party Mode"
 echo
-echo -e "${BOLD}🎉 Party Mode brings all 9 agents together for brainstorming!${NC}"
+echo -e "${BOLD}🎉 Party Mode brings all 10 agents together for brainstorming!${NC}"
 echo
 echo "Learn more: https://github.com/${REPO}"
 echo
