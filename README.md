@@ -5,7 +5,7 @@
 
 > **What makes ASK different:** Traditional AI agents lose context between sessions. ASK agents use Beads' graph-based issue tracker to maintain memory, track dependencies, and coordinate work—like a team with shared institutional knowledge.
 
-https://github.com/user-attachments/assets/f0529e70-f437-4a14-93bc-4ab5a0450540
+https://github.com/tidoemanuele/agile-sensing-kit/releases/download/untagged-d56a13d6335e95abec4e/Combined_Video_Final_v3_20251215_155703.mp4
 
 ## 🎯 Overview
 
