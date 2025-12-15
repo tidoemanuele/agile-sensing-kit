@@ -46,8 +46,8 @@
 		}
 	},
 
-	// Install APM CLI after container creation
-	"postCreateCommand": "pip install --user apm-cli && apm --version",
+	// Install APM CLI and run ASK setup (Beads + Agent Mail) after container creation
+	"postCreateCommand": "pip install --user apm-cli && apm --version && bash scripts/setup.sh",
 
 	// Pass through GitHub tokens from local environment
 	"remoteEnv": {

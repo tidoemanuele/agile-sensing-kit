@@ -46,43 +46,46 @@ install_beads_mac() {
 }
 
 install_beads_linux() {
-  log_info "Installing Beads CLI (building from source)..."
+  log_info "Installing Beads CLI from pre-built binary..."
 
-  # Save current directory
-  local ORIG_DIR="$(pwd)"
+  # Detect architecture
+  local ARCH=$(uname -m)
+  case "$ARCH" in
+    x86_64)  ARCH="amd64" ;;
+    aarch64) ARCH="arm64" ;;
+    arm64)   ARCH="arm64" ;;
+    *)       log_error "Unsupported architecture: $ARCH" && exit 1 ;;
+  esac
 
-  # Check if Go 1.22+ is available
-  GO_VERSION=$(go version 2>/dev/null | grep -oP 'go\K[0-9]+\.[0-9]+' || echo "0.0")
-  GO_MAJOR=$(echo "$GO_VERSION" | cut -d. -f1)
-  GO_MINOR=$(echo "$GO_VERSION" | cut -d. -f2)
-
-  NEED_GO=false
-  if [ "$GO_MAJOR" -lt 1 ] || ([ "$GO_MAJOR" -eq 1 ] && [ "$GO_MINOR" -lt 22 ]); then
-    NEED_GO=true
+  # Get latest release version
+  local VERSION=$(curl -s https://api.github.com/repos/steveyegge/beads/releases/latest | grep '"tag_name"' | sed -E 's/.*"v([^"]+)".*/\1/')
+  if [ -z "$VERSION" ]; then
+    VERSION="0.30.0"  # Fallback version
   fi
 
-  if [ "$NEED_GO" = true ]; then
-    log_info "Installing Go 1.22.5..."
-    curl -fsSL https://go.dev/dl/go1.22.5.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
-    export PATH=/usr/local/go/bin:$PATH
-    log_success "Go 1.22.5 installed"
+  local URL="https://github.com/steveyegge/beads/releases/download/v${VERSION}/beads_${VERSION}_linux_${ARCH}.tar.gz"
+  log_info "Downloading Beads v${VERSION} for linux/${ARCH}..."
+
+  # Download and extract
+  curl -fsSL "$URL" -o /tmp/beads.tar.gz
+  tar -xzf /tmp/beads.tar.gz -C /tmp
+
+  # Install binary (try sudo, fall back to user bin)
+  if command -v sudo &> /dev/null && sudo -n true 2>/dev/null; then
+    sudo mv /tmp/bd /usr/local/bin/
+    log_info "Installed to /usr/local/bin/bd"
+  else
+    mkdir -p "$HOME/.local/bin"
+    mv /tmp/bd "$HOME/.local/bin/"
+    log_info "Installed to ~/.local/bin/bd"
   fi
+  rm -f /tmp/beads.tar.gz
 
-  # Build beads from source
-  log_info "Building Beads from source..."
-  rm -rf /tmp/beads
-  git clone --depth 1 https://github.com/steveyegge/beads.git /tmp/beads
-  cd /tmp/beads
-  CGO_ENABLED=0 /usr/local/go/bin/go build -o bd ./cmd/bd
-  sudo mv bd /usr/local/bin/
-  cd "$ORIG_DIR"
-  rm -rf /tmp/beads
-
-  # Ensure /usr/local/bin is in PATH
-  if [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
-    export PATH="/usr/local/bin:$PATH"
-    echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
-    log_info "Added /usr/local/bin to PATH"
+  # Ensure install location is in PATH
+  if [[ ":$PATH:" != *":/usr/local/bin:"* ]] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
+    echo 'export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"' >> ~/.bashrc
+    log_info "Added to PATH in ~/.bashrc"
   fi
 
   log_success "Beads CLI installed"
